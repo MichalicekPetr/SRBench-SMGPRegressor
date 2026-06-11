@@ -1,23 +1,23 @@
 #!/bin/bash
 
-# Zjištění absolutní cesty k adresáři, kde se nachází tento skript install.sh
+# Get the absolute path of the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-echo "=== Instalace SMGP Regressoru pro SRBench ==="
+echo "=== Installing SMGP Regressor for SRBench ==="
 
 TARGET_DIR="$SCRIPT_DIR/smgp_src"
 
-# 1. Stažení zdrojových kódů z tvého GitHubu
+# 1. Download or update source codes from GitHub
 if [ -d "$TARGET_DIR" ]; then
-    echo "Složka smgp_src již existuje, aktualizuji kód..."
+    echo "Folder smgp_src already exists, updating source code..."
     cd "$TARGET_DIR" && git pull
 else
-    echo "Stahuji zdrojové kódy z GitHubu..."
+    echo "Downloading source codes from GitHub..."
     git clone https://github.com/MichalicekPetr/SRBench-SMGPRegressor-Src-Files.git "$TARGET_DIR"
 fi
 
-# 2. Instalace závislostí PŘÍMO z requirements.txt, který se zrovna stáhl z GitHubu
-echo "Instaluji Python knihovny podle requirements.txt..."
-pip install -r "$TARGET_DIR/requirements.txt"
+# 2. Install Python dependencies using absolute path and user flag
+echo "Installing Python libraries from requirements.txt..."
+pip install --user -r "$SCRIPT_DIR/requirements.txt"
 
-echo "=== Instalace dokončena úspěšně ==="
+echo "=== Installation completed successfully ==="
